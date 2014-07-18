@@ -1,0 +1,10 @@
+net-snmp.x86_64 : 一个 SNMP 协议工具和库的集合。
+net-snmp-devel.i386 : NET-SNMP 计划的开发环境。
+net-snmp-devel.x86_64 : NET-SNMP 计划的开发环境。
+net-snmp-libs.i386 : NET-SNMP 运行时间库。
+net-snmp-libs.x86_64 : NET-SNMP 运行时间库。
+net-snmp-perl.x86_64 : perl NET-SNMP 模块和 mib2c 工具。
+net-snmp-utils.x86_64 : 来自 NET-SNMP 计划的，使用 SNMP 的网络管理工具。
+
+安装了以上rpm包
+其中snmpwakl是在net-snmp-utils中的。

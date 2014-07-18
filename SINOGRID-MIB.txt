@@ -1,0 +1,483 @@
+SINOGRID-MIB DEFINITIONS ::= BEGIN
+IMPORTS
+    OBJECT-TYPE, NOTIFICATION-TYPE, MODULE-IDENTITY,
+    Integer32, enterprises, Counter32, Counter64, Gauge32
+        FROM SNMPv2-SMI
+ 
+    TEXTUAL-CONVENTION, TimeInterval
+        FROM SNMPv2-TC;
+
+WiseGrid MODULE-IDENTITY
+    LAST-UPDATED "201111290000Z"
+    ORGANIZATION "sinogrid"
+    CONTACT-INFO "email: support@sinogrid.com"
+    DESCRIPTION  "The SINOGRID-SNMP MIB."
+    REVISION	 "201111290000Z"
+    ::= { enterprises 99999 }
+
+
+version OBJECT-TYPE
+    SYNTAX	OCTET STRING (SIZE(0..1024))
+    MAX-ACCESS	read-only
+    STATUS	current
+    DESCRIPTION "version of the program"
+    ::= { WiseGrid 1 }
+
+uptime OBJECT-TYPE
+    SYNTAX	OCTET STRING (SIZE(0..1024))
+    MAX-ACCESS	read-only
+    STATUS	current
+    DESCRIPTION "current system load and running time"
+    ::= { WiseGrid 2 }
+
+CurrentDate OBJECT-TYPE
+    SYNTAX	OCTET STRING (SIZE(0..64))
+    MAX-ACCESS	read-only
+    STATUS	current
+    DESCRIPTION "system current date time"
+    ::= { WiseGrid 6 }
+
+Hostname    OBJECT-TYPE
+    SYNTAX	OCTET STRING (SIZE(0..64))
+    MAX-ACCESS	read-only
+    STATUS	current
+    DESCRIPTION "hostname information"
+    ::= { WiseGrid 7 }
+
+-- last information table
+
+lastinfoTable OBJECT-TYPE
+    SYNTAX      SEQUENCE OF lastinfoEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION "show listing of last logged in users"
+    ::= { WiseGrid 11 }
+
+lastinfoEntry OBJECT-TYPE
+	SYNTAX      lastinfoEntry
+	MAX-ACCESS  not-accessible
+	STATUS      current
+    	DESCRIPTION "show listing of last logged in users"
+	::= { lastinfoTable 1 }
+
+lastinfoEntry ::= SEQUENCE {
+	lastinfoDesc	OCTET STRING,
+	}
+
+lastinfoDesc   OBJECT-TYPE
+	SYNTAX      OCTET STRING (SIZE(0..1024))
+	MAX-ACCESS  read-only
+	STATUS      current
+    	DESCRIPTION "show listing of last logged in users"
+	::= { lastinfoEntry 1 }
+
+
+
+-- who information table
+
+whoinfoTable OBJECT-TYPE
+    SYNTAX      SEQUENCE OF whoinfoEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION "show who is logged on"
+    ::= { WiseGrid 12 }
+
+whoinfoEntry OBJECT-TYPE
+	SYNTAX      whoinfoEntry
+	MAX-ACCESS  not-accessible
+	STATUS      current
+    	DESCRIPTION "show who is logged on"
+	::= { whoinfoTable 1 }
+
+whoinfoEntry ::= SEQUENCE {
+	whoinfoDesc	OCTET STRING,
+	}
+
+whoinfoDesc   OBJECT-TYPE
+	SYNTAX      OCTET STRING (SIZE(0..1024))
+	MAX-ACCESS  read-only
+	STATUS      current
+    	DESCRIPTION "show who is logged on"
+	::= { whoinfoEntry 1 }
+
+
+
+-- high available table
+
+hbinfoTable OBJECT-TYPE
+    SYNTAX      SEQUENCE OF hbinfoEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION "system hb information table ."
+    ::= { WiseGrid 13 }
+
+hbinfoEntry OBJECT-TYPE
+	SYNTAX      hbinfoEntry
+	MAX-ACCESS  not-accessible
+	STATUS      current
+	DESCRIPTION "cpu information entry"
+	::= { hbinfoTable 1 }
+
+hbinfoEntry ::= SEQUENCE {
+	hbinfoKey	OCTET STRING,
+	hbinfoValue	OCTET STRING,
+	}
+
+hbinfoKey     OBJECT-TYPE
+	SYNTAX      OCTET STRING (SIZE(0..1024))
+	MAX-ACCESS  read-only
+	STATUS      current
+	DESCRIPTION "hb attribute key"
+	::= { hbinfoEntry 1 }
+
+hbinfoValue   OBJECT-TYPE
+	SYNTAX      OCTET STRING (SIZE(0..1024))
+	MAX-ACCESS  read-only
+	STATUS      current
+	DESCRIPTION "hb attribute value"
+	::= { hbinfoEntry 2 }
+
+
+-- disk information table
+
+diskinfoTable OBJECT-TYPE
+    SYNTAX      SEQUENCE OF diskinfoEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION "system disk information table ."
+    ::= { WiseGrid 14 }
+
+diskinfoEntry OBJECT-TYPE
+	SYNTAX      diskinfoEntry
+	MAX-ACCESS  not-accessible
+	STATUS      current
+	DESCRIPTION "cpu information entry"
+	::= { diskinfoTable 1 }
+
+diskinfoEntry ::= SEQUENCE {
+	diskinfoDesc	OCTET STRING,
+	}
+
+diskinfoDesc   OBJECT-TYPE
+	SYNTAX      OCTET STRING (SIZE(0..1024))
+	MAX-ACCESS  read-only
+	STATUS      current
+	DESCRIPTION "disk status description"
+	::= { diskinfoEntry 1 }
+
+
+
+-- memory information table 
+
+meminfoTable OBJECT-TYPE
+    SYNTAX      SEQUENCE OF meminfoEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION "system memory information table ."
+    ::= { WiseGrid 15 }
+
+meminfoEntry OBJECT-TYPE
+	SYNTAX      meminfoEntry
+	MAX-ACCESS  not-accessible
+	STATUS      current
+	DESCRIPTION "cpu information entry"
+	::= { meminfoTable 1 }
+
+meminfoEntry ::= SEQUENCE {
+	meminfoDesc	OCTET STRING,
+	}
+
+meminfoDesc   OBJECT-TYPE
+	SYNTAX      OCTET STRING (SIZE(0..1024))
+	MAX-ACCESS  read-only
+	STATUS      current
+	DESCRIPTION "memory status description"
+	::= { meminfoEntry 1 }
+
+
+
+-- cpu information table 
+
+cpuinfoTable OBJECT-TYPE
+    SYNTAX      SEQUENCE OF cpuinfoEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION "system cpu information table ."
+    ::= { WiseGrid 16 }
+
+cpuinfoEntry OBJECT-TYPE
+	SYNTAX      cpuinfoEntry
+	MAX-ACCESS  not-accessible
+	STATUS      current
+	DESCRIPTION "cpu information entry"
+	::= { cpuinfoTable 1 }
+
+cpuinfoEntry ::= SEQUENCE {
+        cpuinfoDesc	OCTET STRING,
+	}
+
+cpuinfoDesc   OBJECT-TYPE
+	SYNTAX      OCTET STRING (SIZE(0..1024))
+	MAX-ACCESS  read-only
+	STATUS      current
+	DESCRIPTION "cpu status description"
+	::= { cpuinfoEntry 1 }
+
+
+
+-- virtual service table
+
+
+vsServiceTable OBJECT-TYPE
+    SYNTAX      SEQUENCE OF vsServiceEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION "A table containing vs service-specific information."
+    ::= { WiseGrid 17 }
+
+vsServiceEntry OBJECT-TYPE
+	SYNTAX      vsServiceEntry
+	MAX-ACCESS  not-accessible
+	STATUS      current
+	DESCRIPTION "information about a vs service"
+	INDEX   { vsServiceNumber }
+	::= { vsServiceTable 1 }
+
+vsServiceEntry ::= SEQUENCE {
+        vsServiceNumber			INTEGER,
+        vsServiceAddress		OCTET STRING,
+        vsServiceSchedType		OCTET STRING,
+        vsServiceProto       		OCTET STRING,
+        vsServiceEnable 		OCTET STRING,
+	vsServicePersistent		OCTET STRING,
+	vsServiceNumDests		INTEGER, 
+	vsServiceEstabConnCurrent	OCTET STRING,
+	vsServiceNumberConnSecond	OCTET STRING,
+	vsServiceUpTrafficSecond	OCTET STRING,
+	vsServiceDownTrafficSecond	OCTET STRING,
+	vsServiceAliveState		OCTET STRING,
+	}
+
+vsServiceNumber OBJECT-TYPE
+	SYNTAX      INTEGER (0..65535)
+	MAX-ACCESS  read-only
+	STATUS      current
+	DESCRIPTION "The vs service number"
+	::= { vsServiceEntry 1 }
+
+vsServiceAddress    OBJECT-TYPE
+	SYNTAX      OCTET STRING (SIZE(0..1024))
+	MAX-ACCESS  read-only
+	STATUS      current
+	DESCRIPTION "Virtual IP (VIP) and PORT"
+	::= { vsServiceEntry 2 }
+
+vsServiceSchedType OBJECT-TYPE
+	SYNTAX      OCTET STRING (SIZE(0..32))
+	MAX-ACCESS  read-only
+	STATUS      current
+	DESCRIPTION "Scheduler Type"
+	::= { vsServiceEntry 3 }
+
+vsServiceProto	OBJECT-TYPE
+	SYNTAX      OCTET STRING (SIZE(0..32))
+	MAX-ACCESS  read-only
+	STATUS      current
+	DESCRIPTION "Protocol (tcp/udp) or packets marked by fwmark"
+	::= { vsServiceEntry 4 }
+
+vsServiceEnable	OBJECT-TYPE
+	SYNTAX      OCTET STRING (SIZE(0..32))
+	MAX-ACCESS  read-only
+	STATUS      current
+	DESCRIPTION "Enable status"
+	::= { vsServiceEntry 5 }
+
+vsServicePersistent	OBJECT-TYPE
+	SYNTAX          OCTET STRING (SIZE(0..32))
+	MAX-ACCESS      read-only
+	STATUS          current
+	DESCRIPTION     "Persistent method"
+	::= { vsServiceEntry 6 }
+
+
+vsServiceNumDests OBJECT-TYPE
+	SYNTAX      INTEGER (0..65535)
+	MAX-ACCESS  read-only
+	STATUS      current
+	DESCRIPTION "the number of realservers for this virtual server"
+	::= { vsServiceEntry 7 }
+
+vsServiceTransparent      OBJECT-TYPE
+	SYNTAX            OCTET STRING (SIZE(0..32))
+	MAX-ACCESS        read-only
+	STATUS            current
+	DESCRIPTION "Transparent Mode"
+	::= { vsServiceEntry 8 }
+
+vsServiceEstabConnCurrent OBJECT-TYPE
+	SYNTAX            OCTET STRING (SIZE(0..32))
+	MAX-ACCESS        read-only
+	STATUS            current
+	DESCRIPTION "the total number of connections in established state"
+	::= { vsServiceEntry 9 }
+
+vsServiceNumberConnSecond OBJECT-TYPE
+	SYNTAX            OCTET STRING (SIZE(0..32))
+	MAX-ACCESS        read-only
+	STATUS            current
+	DESCRIPTION "the total number of incomming connections per second"
+	::= { vsServiceEntry 10 }
+
+vsServiceUpTrafficSecond OBJECT-TYPE
+	SYNTAX            OCTET STRING (SIZE(0..32))
+	MAX-ACCESS        read-only
+	STATUS            current
+	DESCRIPTION "the total number of ingoing pakets per second"
+	::= { vsServiceEntry 11 }
+
+vsServiceDownTrafficSecond OBJECT-TYPE
+	SYNTAX             OCTET STRING (SIZE(0..32))
+	MAX-ACCESS         read-only
+	STATUS             current
+	DESCRIPTION "the total number of outgoing pakets per second"
+	::= { vsServiceEntry 12 }
+
+vsServiceAliveState        OBJECT-TYPE
+	SYNTAX             OCTET STRING (SIZE(0..32))
+	MAX-ACCESS         read-only
+	STATUS             current
+	DESCRIPTION "current alive state of vserver"
+	::= { vsServiceEntry 13 }
+
+
+-- realserver table
+
+
+vsRealTable OBJECT-TYPE
+    SYNTAX      SEQUENCE OF vsRealEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION "A table containing per realserver information."
+    ::= { WiseGrid 18 }
+
+vsRealEntry OBJECT-TYPE
+	SYNTAX      vsRealEntry
+	MAX-ACCESS  not-accessible
+	STATUS      current
+	DESCRIPTION
+		"information about a vs real server"
+	INDEX   { 	vsRealServiceNumber,
+			vsRealServerNumber
+		}
+	
+	::= { vsRealTable 1 }
+
+vsRealEntry ::= SEQUENCE {
+        vsRealServiceNumber		INTEGER,
+        vsRealServerNumber		INTEGER,
+        vsRealServerAddress		OCTET STRING,
+	vsRealServerEnable		OCTET STRING,
+	vsRealServerWeight		OCTET STRING,
+	vsRealServerMaxConn		OCTET STRING,
+	vsRealServerMaxReq		OCTET STRING,
+	vsRealServerBandWidth 		OCTET STRING,
+	vsRealServerEstabConnCurrent	OCTET STRING,
+	vsRealServerNumberConnSecond	OCTET STRING,
+	vsRealServerUpTrafficSecond	OCTET STRING,
+	vsRealServerDownTrafficSecond	OCTET STRING,
+	vsRealServerAliveState		OCTET STRING,
+	}
+
+vsRealServiceNumber OBJECT-TYPE
+	SYNTAX      INTEGER (0..65535)
+	MAX-ACCESS  read-only
+	STATUS      current
+	DESCRIPTION "The vs service number"
+	::= { vsRealEntry 1 }
+    
+vsRealServerNumber OBJECT-TYPE
+	SYNTAX      INTEGER (0..65535)
+	MAX-ACCESS  read-only
+	STATUS      current
+	DESCRIPTION "The vs realserver number"
+	::= { vsRealEntry 2 }
+
+vsRealServerAddress OBJECT-TYPE
+	SYNTAX      OCTET STRING (SIZE(0..32))
+	MAX-ACCESS  read-only
+	STATUS      current
+	DESCRIPTION "The vs realserver IP"
+	::= { vsRealEntry 3 }
+
+vsRealServerEnable OBJECT-TYPE
+	SYNTAX      OCTET STRING (SIZE(0..32))
+	MAX-ACCESS  read-only
+	STATUS      current
+	DESCRIPTION "Enable status"
+	::= { vsRealEntry 4 }
+
+vsRealServerWeight OBJECT-TYPE
+	SYNTAX      OCTET STRING (SIZE(0..32))
+	MAX-ACCESS  read-only
+	STATUS      current
+	DESCRIPTION "The vs realserver weight"
+	::= { vsRealEntry 5 }
+
+vsRealServerMaxConn OBJECT-TYPE
+	SYNTAX      OCTET STRING (SIZE(0..32))
+	MAX-ACCESS  read-only
+	STATUS      current
+	DESCRIPTION "The vs realserver maximum connection number "
+	::= { vsRealEntry 6 }
+
+vsRealServerMaxReq  OBJECT-TYPE
+	SYNTAX      OCTET STRING (SIZE(0..32))
+	MAX-ACCESS  read-only
+	STATUS      current
+	DESCRIPTION "The vs realserver maximum request number "
+	::= { vsRealEntry 7 }
+
+vsRealServerBandWidth OBJECT-TYPE
+	SYNTAX        OCTET STRING (SIZE(0..32))
+	MAX-ACCESS    read-only
+	STATUS        current
+	DESCRIPTION "The vs realserver bandwidth limit"
+	::= { vsRealEntry 8 }
+
+vsRealServerEstabConnCurrent OBJECT-TYPE
+	SYNTAX               OCTET STRING (SIZE(0..32))
+	MAX-ACCESS           read-only
+	STATUS               current
+	DESCRIPTION "the total number of connections in established state"
+	::= { vsRealEntry 9 }
+
+vsRealServerNumberConnSecond OBJECT-TYPE
+	SYNTAX            OCTET STRING (SIZE(0..32))
+	MAX-ACCESS        read-only
+	STATUS            current
+	DESCRIPTION "the total number of incomming connections per second"
+	::= { vsRealEntry 10 }
+
+vsRealServerUpTrafficSecond OBJECT-TYPE
+	SYNTAX            OCTET STRING (SIZE(0..32))
+	MAX-ACCESS        read-only
+	STATUS            current
+	DESCRIPTION "the total number of ingoing pakets per second"
+	::= { vsRealEntry 11 }
+
+vsRealServerDownTrafficSecond OBJECT-TYPE
+	SYNTAX             OCTET STRING (SIZE(0..32))
+	MAX-ACCESS         read-only
+	STATUS             current
+	DESCRIPTION "the total number of outgoing pakets per second"
+	::= { vsRealEntry 12 }
+
+vsRealServerAliveState OBJECT-TYPE
+	SYNTAX             OCTET STRING (SIZE(0..32))
+	MAX-ACCESS         read-only
+	STATUS             current
+	DESCRIPTION "current alive state of rserver"
+	::= { vsRealEntry 13 }
+
+END
