@@ -4,6 +4,32 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.6	//
-DEMO_USE_SNMP_VERSION_3	snmpdemoapp.c	6;"	d	file:
-main	snmpdemoapp.c	/^int main(int argc, char ** argv)$/;"	f
-our_v3_passphrase	snmpdemoapp.c	/^const char *our_v3_passphrase = "The Net-SNMP Demo Password";$/;"	v
+BUILDAGENTLIBS	example/Makefile	/^BUILDAGENTLIBS=`net-snmp-config --agent-libs`$/;"	m
+BUILDAGENTLIBS	example2/Makefile	/^BUILDAGENTLIBS=`net-snmp-config --agent-libs`$/;"	m
+BUILDLIBS	example/Makefile	/^BUILDLIBS=`net-snmp-config --libs`$/;"	m
+BUILDLIBS	example2/Makefile	/^BUILDLIBS=`net-snmp-config --libs`$/;"	m
+CC	example/Makefile	/^CC=gcc$/;"	m
+CC	example2/Makefile	/^CC=gcc$/;"	m
+CFLAGS	example/Makefile	/^CFLAGS=-I. `net-snmp-config --cflags`$/;"	m
+CFLAGS	example2/Makefile	/^CFLAGS=-I. `net-snmp-config --cflags`$/;"	m
+DEMO_USE_SNMP_VERSION_3	example/snmp.c	6;"	d	file:
+DEMO_USE_SNMP_VERSION_3	example2/snmpdemoapp.c	6;"	d	file:
+DLFLAGS	example/Makefile	/^DLFLAGS=-fPIC -shared$/;"	m
+DLFLAGS	example2/Makefile	/^DLFLAGS=-fPIC -shared$/;"	m
+OBJS1	example/Makefile	/^OBJS1=snmp.o$/;"	m
+OBJS1	example2/Makefile	/^OBJS1=snmpdemoapp.o$/;"	m
+OBJS2	example2/Makefile	/^OBJS2=example-demon.o nstAgentSubagentObject.o$/;"	m
+OBJS3	example2/Makefile	/^OBJS3=asyncapp.o$/;"	m
+TARGETS	example/Makefile	/^TARGETS=snmp$/;"	m
+TARGETS	example2/Makefile	/^TARGETS=snmpdemoapp$/;"	m
+TEST_H	example3/Test.h	6;"	d
+handle_GetTime	example3/Test.c	/^    handle_GetTime(netsnmp_mib_handler *handler,  $/;"	f
+handle_GetTime	example3/Test.h	/^Netsnmp_Node_Handler handle_GetTime;$/;"	v
+handle_GetTime	example3/test2.c	/^handle_GetTime(netsnmp_mib_handler *handler,$/;"	f
+init_Test	example3/Test.c	/^    init_Test(void)  $/;"	f
+init_Test	example3/test2.c	/^init_Test(void)$/;"	f
+main	example/snmp.c	/^main(int argc, char *argv[])$/;"	f
+main	example2/snmpdemoapp.c	/^int main(int argc, char ** argv)$/;"	f
+main	example3/snmp_test.c	/^main (int argc, char *argv[])$/;"	f
+our_v3_passphrase	example/snmp.c	/^const char *our_v3_passphrase = "The Net-SNMP Demo password";$/;"	v
+our_v3_passphrase	example2/snmpdemoapp.c	/^const char *our_v3_passphrase = "The Net-SNMP Demo Password";$/;"	v
