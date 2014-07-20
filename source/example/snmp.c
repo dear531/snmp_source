@@ -43,22 +43,29 @@ main(int argc, char *argv[])
 		snmp_log(LOG_ERR,
 			"Error generating KU from authentication pass phrase.\n");
 		exit(EXIT_FAILURE);
-#else /* we'll use the insecure (but simplier) SNMPv1 */
-		session.version			= SNMP_VERSION_1;
-		session.community		= "demopubic";
-		session.community_len	= strlen(session.community);
-#endif /* end of version 3 and 1 */
-		ss				= snmp_open(&session);
-		if (!ss) {
-			snmp_perror(argv[0]);
-			snmp_log(LOG_ERR,
-				"open the session failure\n");
-			exit(EXIT_FAILURE);
-		}
-		pdu				= snmp_pdu_create(SNMP_MSG_GET);
 	}
-	read_objid(".1.3.6.1.2.1.1.1.0", anOID, &anOID_len);
+#else /* we'll use the insecure (but simplier) SNMPv1 */
+	session.version			= SNMP_VERSION_1;
+	session.community		= "demopublic";
+	session.community_len	= strlen(session.community);
+#endif /* end of version 3 and 1 */
+	SOCK_STARTUP;
+	ss				= snmp_open(&session);
+	if (!ss) {
+		snmp_perror(argv[0]);
+		snmp_log(LOG_ERR,
+			"open the session failure\n");
+		exit(EXIT_FAILURE);
+	}
+	pdu				= snmp_pdu_create(SNMP_MSG_GET);
+    anOID_len = MAX_OID_LEN;
+    if (!snmp_parse_oid(".1.3.6.1.2.1.1.1.0", anOID, &anOID_len)) {
+      snmp_perror(".1.3.6.1.2.1.1.1.0");
+      SOCK_CLEANUP;
+      exit(1);
+    }
 #if OTHER_METHODS
+	read_objid(".1.3.6.1.2.1.1.1.0", anOID, &anOID_len);
 	get_node("sysDescr.0", anOID, &anOID_len);
 	read_objid("system.sysDescr.0", anOID, &anOID_len);
 #endif
@@ -90,6 +97,7 @@ main(int argc, char *argv[])
 	if (!response)
 		free(response);
 	snmp_close(ss);
+    SOCK_CLEANUP;
 
 	return 0;
 }
