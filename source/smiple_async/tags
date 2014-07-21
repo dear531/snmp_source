@@ -1,0 +1,35 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.6	//
+BUILDAGENTLIBS	Makefile	/^BUILDAGENTLIBS=`net-snmp-config --agent-libs`$/;"	m	language:Make
+BUILDLIBS	Makefile	/^BUILDLIBS=`net-snmp-config --libs`$/;"	m	language:Make
+CC	Makefile	/^CC=gcc$/;"	m	language:Make
+CFLAGS	Makefile	/^CFLAGS=-I. `net-snmp-config --cflags`$/;"	m	language:Make
+DLFLAGS	Makefile	/^DLFLAGS=-fPIC -shared$/;"	m	language:Make
+Name	asyncapp.c	/^  const char *Name;$/;"	m	language:C	struct:oid	file:
+OBJS1	Makefile	/^OBJS1=snmpdemoapp.o$/;"	m	language:Make
+OBJS2	Makefile	/^OBJS2=example-demon.o nstAgentSubagentObject.o$/;"	m	language:Make
+OBJS3	Makefile	/^OBJS3=asyncapp.o$/;"	m	language:Make
+Oid	asyncapp.c	/^  oid Oid[MAX_OID_LEN];$/;"	m	language:C	struct:oid	file:
+OidLen	asyncapp.c	/^  int OidLen;$/;"	m	language:C	struct:oid	file:
+TARGETS	Makefile	/^TARGETS=example-demon snmpdemoapp asyncapp$/;"	m	language:Make
+active_hosts	asyncapp.c	/^int active_hosts;			\/* hosts that we have not completed *\/$/;"	v	language:C
+asynch_response	asyncapp.c	/^int asynch_response(int operation, struct snmp_session *sp, int reqid,$/;"	f	language:C	signature:(int operation, struct snmp_session *sp, int reqid, struct snmp_pdu *pdu, void *magic)
+asynchronous	asyncapp.c	/^void asynchronous(void)$/;"	f	language:C	signature:(void)
+community	asyncapp.c	/^  const char *community;$/;"	m	language:C	struct:host	file:
+current_oid	asyncapp.c	/^  struct oid *current_oid;		\/* How far in our poll are we *\/$/;"	m	language:C	struct:session	file:
+host	asyncapp.c	/^struct host {$/;"	s	language:C	file:
+hosts	asyncapp.c	/^} hosts[] = {$/;"	v	language:C
+initialize	asyncapp.c	/^void initialize (void)$/;"	f	language:C	signature:(void)
+main	asyncapp.c	/^int main (int argc, char **argv)$/;"	f	language:C	signature:(int argc, char **argv)
+name	asyncapp.c	/^  const char *name;$/;"	m	language:C	struct:host	file:
+oid	asyncapp.c	/^struct oid {$/;"	s	language:C	file:
+oids	asyncapp.c	/^} oids[] = {$/;"	v	language:C
+print_result	asyncapp.c	/^int print_result (int status, struct snmp_session *sp, struct snmp_pdu *pdu)$/;"	f	language:C	signature:(int status, struct snmp_session *sp, struct snmp_pdu *pdu)
+sess	asyncapp.c	/^  struct snmp_session *sess;		\/* SNMP session data *\/$/;"	m	language:C	struct:session	file:
+session	asyncapp.c	/^struct session {$/;"	s	language:C	file:
+sessions	asyncapp.c	/^} sessions[sizeof(hosts)\/sizeof(hosts[0])];$/;"	v	language:C
+synchronous	asyncapp.c	/^void synchronous (void)$/;"	f	language:C	signature:(void)
